@@ -1,0 +1,54 @@
+---
+import Card from "./Card/index.astro";
+import { SITE } from "../site-config";
+
+const socialLinkClass =
+  "inline-block w-fit text-darkslate-100 hover:text-primary-400 hover:translate-x-0.5 transition-all duration-150";
+---
+
+<Card colSpan="md:col-span-1" rowSpan="md:row-span-4" class="pad-lg">
+  <div class="h-full flex flex-col justify-between">
+    <header class="flex items-center">
+      <h2 class="text-white text-xl font-bold m-0">
+        <span class="lang-en">Let's work together!</span>
+        <span class="lang-fa">همکاری و ارتباط با من</span>
+      </h2>
+    </header>
+    <address class="flex flex-col mt-3 not-italic">
+      <h3 class="text-xs uppercase tracking-wider text-darkslate-300 m-0 mb-1">
+        <span class="lang-en">Contact Details</span>
+        <span class="lang-fa">اطلاعات تماس</span>
+      </h3>
+      <a
+        href={`mailto:${SITE.links.email}`}
+        class="text-xs break-all text-white hover:text-primary-400 transition-colors"
+      >
+        {SITE.links.email}
+      </a>
+      <p class="text-xs text-darkslate-200 mt-1 m-0">
+        <span class="lang-en">{SITE.location.countryName}</span>
+        <span class="lang-fa">{SITE.location.countryNameFa}</span>
+      </p>
+    </address>
+    <div class="flex flex-col mt-3 w-fit">
+      <h3 class="text-xs uppercase tracking-wider text-darkslate-300 m-0 mb-1">
+        <span class="lang-en">Social Media</span>
+        <span class="lang-fa">شبکه‌های اجتماعی</span>
+      </h3>
+      <ul class="list-none p-0 m-0 space-y-1 text-sm">
+        <li>
+          <a href={SITE.links.telegram} target="_blank" class={socialLinkClass}>
+            <span class="lang-en">Telegram ({SITE.links.telegramHandle})</span>
+            <span class="lang-fa">تلگرام ({SITE.links.telegramHandle})</span>
+          </a>
+        </li>
+        <li>
+          <a href={SITE.links.instagram} target="_blank" class={socialLinkClass}>
+            <span class="lang-en">Instagram ({SITE.links.instagramHandle})</span>
+            <span class="lang-fa">اینستاگرام ({SITE.links.instagramHandle})</span>
+          </a>
+        </li>
+      </ul>
+    </div>
+  </div>
+</Card>

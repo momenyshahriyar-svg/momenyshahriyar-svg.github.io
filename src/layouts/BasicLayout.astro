@@ -1,0 +1,383 @@
+---
+import "../style.css";
+import { ClientRouter } from "astro:transitions";
+import { Icon } from "astro-icon/components";
+import { Font } from "astro:assets";
+import { SITE } from "../site-config";
+import AvatarCompanion from "../components/AvatarCompanion.astro";
+import GridTransition from "../components/GridTransition.astro";
+import StylePanel from "../components/StylePanel.astro";
+import { BUTTON_FRAME, cssVars } from "../lib/nine-slice";
+import { SHEET_BY_THEME } from "../lib/avatar-sprite.mjs";
+
+const buttonFrameVars = `:root{${cssVars(BUTTON_FRAME)}}`;
+
+const showsAvatar = Astro.url.pathname.replace(/\/+$/, "") === "";
+
+const headBootstrap = `
+  try {
+    var savedLang = localStorage.getItem("lang") || "en";
+    document.documentElement.lang = savedLang;
+    document.documentElement.dir = savedLang === "fa" ? "rtl" : "ltr";
+    if ((localStorage.getItem("cardBorder") ?? "custom") === "custom")
+      document.documentElement.classList.add("cards-custom");
+    if (localStorage.getItem("companionEnabled") === "false")
+      document.documentElement.classList.add("companion-off");
+    ${
+      showsAvatar
+        ? `
+    var sheetsByTheme = ${JSON.stringify(SHEET_BY_THEME)};
+    var sheetUrl =
+      sheetsByTheme[localStorage.getItem("theme")] || sheetsByTheme.default;
+    document.documentElement.style.setProperty(
+      "--memoji-sheet",
+      'url("' + sheetUrl + '")',
+    );
+    var preloadLink = document.createElement("link");
+    preloadLink.rel = "preload";
+    preloadLink.as = "image";
+    preloadLink.href = sheetUrl;
+    preloadLink.fetchPriority = "high";
+    document.head.appendChild(preloadLink);`
+        : ""
+    }
+  } catch {}
+`;
+
+interface Props {
+  title: string;
+  description: string;
+  page?: "blog";
+  pubDate?: string;
+  hideSoundToggle?: boolean;
+  hideCompanion?: boolean;
+  noindex?: boolean;
+}
+
+const {
+  title,
+  description,
+  page,
+  pubDate,
+  hideSoundToggle,
+  hideCompanion,
+  noindex,
+} = Astro.props;
+const image = `${Astro.url.origin}/og-image.png`;
+
+const schema =
+  page !== "blog"
+    ? {
+        "@context": "https://schema.org",
+        "@type": "Person",
+        name: SITE.author.fullName,
+        url: Astro.url.origin,
+        sameAs: [SITE.links.telegram, SITE.links.instagram],
+        image: `${Astro.url.origin}/og-image.png`,
+        jobTitle: SITE.author.jobTitle,
+        knowsAbout: [
+          "Illustration",
+          "2D Animation",
+          "Character Design",
+          "Concept Art",
+          "Storyboard",
+          "Art Direction",
+          "2D Game Development",
+          "Godot Engine",
+        ],
+      }
+    : {
+        "@context": "https://schema.org",
+        "@type": "BlogPosting",
+        mainEntityOfPage: {
+          "@type": "WebPage",
+          "@id": Astro.url.href,
+        },
+        headline: title,
+        description: description || title,
+        image: `${Astro.url.origin}/og-image.png`,
+        author: {
+          "@type": "Person",
+          name: SITE.author.fullName,
+          url: Astro.url.origin,
+        },
+        datePublished: pubDate || new Date().toISOString(),
+        dateModified: pubDate || new Date().toISOString(),
+      };
+---
+
+<!doctype html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="UTF-8" />
+    <Font cssVariable="--font-cabinet-grotesk" preload />
+    <Font cssVariable="--font-satoshi" preload />
+    <link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin />
+    <link
+      href="https://cdn.jsdelivr.net/gh/rastikerdar/vazirmatn@v33.003/Vazirmatn-font-face.css"
+      rel="stylesheet"
+      type="text/css"
+    />
+    <script is:inline set:html={headBootstrap} />
+    <ClientRouter />
+    <meta content="width=device-width, initial-scale=1.0" name="viewport" />
+    <link rel="icon" type="image/png" href="/favicon-96x96.png" sizes="96x96" />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <link rel="shortcut icon" href="/favicon.ico" />
+    <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
+    <meta name="apple-mobile-web-app-title" content={SITE.author.fullName} />
+    <link rel="manifest" href="/site.webmanifest" />
+    <meta content={Astro.generator} name="generator" />
+    <title>{title}</title>
+    <meta content={description} name="description" />
+    <meta
+      content={noindex ? "noindex, nofollow" : "index, follow"}
+      name="robots"
+    />
+    <meta name="theme-color" content="#171717" />
+    <meta name="author" content={SITE.author.fullName} />
+    <meta
+      name="keywords"
+      content="Shahriyar Momeny, شهریار مومنی, Illustrator, 2D Animation, Game Developer, Concept Artist, Character Design, Storyboard, Art Director, Godot"
+    />
+    <meta
+      content={page === "blog" ? "article" : "website"}
+      property="og:type"
+    />
+    <meta content={title} property="og:title" />
+    <meta content={description} property="og:description" />
+    <meta content={Astro.url.origin} property="og:url" />
+    <meta property="og:site_name" content={SITE.author.fullName} />
+    <meta property="og:locale" content="en_US" />
+    <meta
+      content={image || `${Astro.url.origin}/og-image.png`}
+      property="og:image"
+    />
+    <meta property="og:image:alt" content={description} />
+    <link href={Astro.url.href} rel="canonical" />
+    <script
+      is:inline
+      set:html={JSON.stringify(schema)}
+      type="application/ld+json"
+    />
+    <style is:inline set:html={buttonFrameVars}></style>
+  </head>
+  <body class="bg-darkslate-700 flex flex-col justify-center items-center">
+    <script is:inline>
+      try {
+        var b = document.body;
+        var t = localStorage.getItem("theme");
+        if (t && t !== "default") b.classList.add(t);
+        if ((localStorage.getItem("cardBorder") ?? "custom") !== "custom") {
+          var s = localStorage.getItem("portfolioStyle");
+          if (s && s !== "default") b.classList.add(s);
+        }
+      } catch {}
+    </script>
+    <GridTransition />
+    <slot />
+    <div
+      id="floating-controls"
+      class="fixed bottom-4 right-4 md:bottom-6 z-50 flex flex-col items-center gap-2"
+    >
+      <button
+        id="lang-toggle"
+        aria-label="Change Language / تغییر زبان"
+        title="Change Language / تغییر زبان"
+        class="chrome--ns w-9 h-9 flex items-center justify-center rounded-lg bg-darkslate-500 border border-darkslate-400 hover:border-primary-500 transition-all duration-200 text-white shadow-lg font-bold text-xs tracking-wider cursor-pointer"
+      >
+        <span class="lang-en">FA</span>
+        <span class="lang-fa">EN</span>
+      </button>
+      {!hideSoundToggle && <StylePanel />}
+      {!hideCompanion && <AvatarCompanion />}
+      {
+        !hideSoundToggle && (
+          <button
+            id="sound-toggle"
+            aria-label="Toggle sound"
+            title="Toggle sound"
+            class="chrome--ns w-9 h-9 flex items-center justify-center rounded-lg bg-darkslate-500 border border-darkslate-400 hover:border-primary-500 transition-all duration-200 text-white shadow-lg"
+          >
+            <Icon id="sound-icon-on" name="pixel-sound-on" class="w-4 h-4" />
+            <Icon
+              id="sound-icon-off"
+              name="pixel-sound-off"
+              class="w-4 h-4 hidden"
+            />
+          </button>
+        )
+      }
+    </div>
+  </body>
+</html>
+
+<script>
+  import { initNineSliceFallback } from "../lib/nine-slice-fallback";
+  import { CARD_HOVER, CHIME, play } from "../lib/sound";
+
+  let disposeNineSlice: (() => void) | null = null;
+  let soundEnabled = localStorage.getItem("soundEnabled") !== "false";
+
+  const playCardHover = () => play(CARD_HOVER);
+
+  function applyLanguage(lang: string, doc: Document = document) {
+    doc.documentElement.lang = lang;
+    doc.documentElement.dir = lang === "fa" ? "rtl" : "ltr";
+  }
+
+  function updateToggleIcon() {
+    document
+      .getElementById("sound-icon-on")
+      ?.classList.toggle("hidden", !soundEnabled);
+    document
+      .getElementById("sound-icon-off")
+      ?.classList.toggle("hidden", soundEnabled);
+  }
+
+  function attachControls() {
+    document.querySelectorAll<HTMLElement>(".card").forEach((card) => {
+      card.removeEventListener("mouseenter", playCardHover);
+      card.addEventListener("mouseenter", playCardHover);
+    });
+
+    document.getElementById("sound-toggle")?.addEventListener("click", () => {
+      soundEnabled = !soundEnabled;
+      localStorage.setItem("soundEnabled", String(soundEnabled));
+      updateToggleIcon();
+    });
+
+    const langBtn = document.getElementById("lang-toggle");
+    if (langBtn && !langBtn.dataset.bound) {
+      langBtn.dataset.bound = "true";
+      langBtn.addEventListener("click", () => {
+        const current = localStorage.getItem("lang") || "en";
+        const next = current === "en" ? "fa" : "en";
+        localStorage.setItem("lang", next);
+        applyLanguage(next);
+        play(CHIME);
+        document.dispatchEvent(
+          new CustomEvent("langchange", { detail: { lang: next } }),
+        );
+      });
+    }
+  }
+
+  document.addEventListener("astro:before-swap", (e) => {
+    const savedLang = localStorage.getItem("lang") || "en";
+    applyLanguage(savedLang, (e as unknown as { newDocument: Document }).newDocument);
+    disposeNineSlice?.();
+    disposeNineSlice = null;
+  });
+
+  document.addEventListener("astro:page-load", () => {
+    const savedLang = localStorage.getItem("lang") || "en";
+    applyLanguage(savedLang);
+    soundEnabled = localStorage.getItem("soundEnabled") !== "false";
+    updateToggleIcon();
+    attachControls();
+    disposeNineSlice?.();
+    disposeNineSlice = initNineSliceFallback();
+  });
+</script>
+
+<script>
+  import {
+    PORTFOLIO_HAS_VISITED_NON_HOME_KEY,
+    PORTFOLIO_LAST_PATH_KEY,
+    normalizePathname,
+  } from "../lib/nav-path";
+
+  if (typeof document !== "undefined") {
+    document.addEventListener("astro:page-load", () => {
+      const path = normalizePathname(window.location.pathname);
+      if (path !== "/") {
+        sessionStorage.setItem(PORTFOLIO_HAS_VISITED_NON_HOME_KEY, "1");
+      }
+
+      queueMicrotask(() => {
+        sessionStorage.setItem(PORTFOLIO_LAST_PATH_KEY, path);
+      });
+    });
+  }
+</script>
+
+<style is:global>
+  :root {
+    --font-vazirmatn: "Vazirmatn", system-ui, -apple-system, sans-serif;
+  }
+
+  body {
+    margin: 0;
+    font-family: var(--font-satoshi);
+    -webkit-font-smoothing: antialiased;
+  }
+
+  h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  h6 {
+    font-family: var(--font-cabinet-grotesk);
+  }
+  p {
+    font-family: var(--font-satoshi);
+  }
+
+  /* Bilingual visibility rules */
+  html[lang="en"] .lang-fa {
+    display: none !important;
+  }
+  html[lang="fa"] .lang-en {
+    display: none !important;
+  }
+
+  /* Persian RTL typography and layout adjustments */
+  html[lang="fa"] body,
+  html[lang="fa"] p,
+  html[lang="fa"] h1,
+  html[lang="fa"] h2,
+  html[lang="fa"] h3,
+  html[lang="fa"] h4,
+  html[lang="fa"] h5,
+  html[lang="fa"] h6,
+  html[lang="fa"] span,
+  html[lang="fa"] a,
+  html[lang="fa"] button,
+  html[lang="fa"] address {
+    font-family: var(--font-vazirmatn) !important;
+    letter-spacing: 0 !important;
+  }
+
+  html[dir="rtl"] .card-arrow-icon {
+    right: auto !important;
+    left: 0 !important;
+    transform: scaleX(-1);
+  }
+  html[dir="rtl"] .group:hover .card-arrow-icon {
+    transform: scaleX(-1) translate(0.25rem, -0.25rem) !important;
+  }
+
+  html[dir="rtl"] #memoji-avatar {
+    right: auto !important;
+    left: -110px;
+  }
+  @media (min-width: 768px) {
+    html[dir="rtl"] #memoji-avatar {
+      left: auto !important;
+    }
+  }
+
+  b {
+    font-weight: 700 !important;
+  }
+
+  @supports (view-transition-name: none) {
+    ::view-transition-old(root),
+    ::view-transition-new(root) {
+      animation-duration: 320ms;
+      animation-timing-function: cubic-bezier(0.22, 1, 0.36, 1);
+    }
+  }
+</style>
