@@ -1,0 +1,729 @@
+<!DOCTYPE html>
+<html lang="fa" dir="rtl" class="dark scroll-smooth">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>محمدحسن مومنی | طراح گرافیک، تصویرگر و بازی‌ساز مستقل</title>
+  <meta name="description" content="پورتفولیوی محمدحسن مومنی (شهریار) - کارشناسی ارشد ارتباط تصویری دانشگاه هنر اصفهان، طراح گرافیک، تصویرگر و توسعه‌دهنده بازی‌های دوبعدی" />
+
+  <!-- Google Fonts: Vazirmatn (Persian), Plus Jakarta Sans (English), JetBrains Mono (Code/Tags) -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Vazirmatn:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+
+  <!-- Tailwind CSS CDN -->
+  <script src="https://cdn.tailwindcss.com"></script>
+
+  <!-- Lucide Icons CDN -->
+  <script src="https://unpkg.com/lucide@latest"></script>
+
+  <script>
+    tailwind.config = {
+      darkMode: 'class',
+      theme: {
+        extend: {
+          fontFamily: {
+            fa: ['Vazirmatn', 'sans-serif'],
+            en: ['Plus Jakarta Sans', 'sans-serif'],
+            mono: ['JetBrains Mono', 'monospace'],
+          },
+          colors: {
+            brand: {
+              50: '#f5f3ff',
+              100: '#ede9fe',
+              400: '#a78bfa',
+              500: '#8b5cf6',
+              600: '#7c3aed',
+              900: '#4c1d95',
+            }
+          }
+        }
+      }
+    }
+  </script>
+
+  <style>
+    body {
+      font-family: 'Vazirmatn', sans-serif;
+      transition: background-color 0.3s ease, color 0.3s ease;
+    }
+    html[lang="en"] body {
+      font-family: 'Plus Jakarta Sans', sans-serif;
+    }
+    .bento-card {
+      transition: transform 0.25s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.25s ease, border-color 0.25s ease;
+    }
+    .bento-card:hover {
+      transform: translateY(-4px);
+    }
+    /* Custom Scrollbar */
+    ::-webkit-scrollbar {
+      width: 8px;
+    }
+    ::-webkit-scrollbar-track {
+      background: #09090b;
+    }
+    ::-webkit-scrollbar-thumb {
+      background: #27272a;
+      border-radius: 9999px;
+    }
+    ::-webkit-scrollbar-thumb:hover {
+      background: #3f3f46;
+    }
+    .pixel-border {
+      background-image: radial-gradient(rgba(139, 92, 246, 0.15) 1px, transparent 1px);
+      background-size: 16px 16px;
+    }
+  </style>
+</head>
+
+<body class="bg-zinc-50 text-zinc-900 dark:bg-[#09090b] dark:text-zinc-100 min-h-screen selection:bg-violet-500 selection:text-white relative overflow-x-hidden">
+
+  <!-- Ambient Background Glow -->
+  <div class="fixed top-[-10%] left-[-10%] w-[45%] h-[45%] rounded-full bg-violet-600/10 dark:bg-violet-600/15 blur-[130px] pointer-events-none z-0"></div>
+  <div class="fixed bottom-[-10%] right-[-10%] w-[45%] h-[45%] rounded-full bg-amber-500/10 dark:bg-amber-500/10 blur-[130px] pointer-events-none z-0"></div>
+
+  <!-- Top Navigation Bar -->
+  <header class="sticky top-4 z-40 max-w-6xl mx-auto px-4">
+    <nav class="backdrop-blur-xl bg-white/80 dark:bg-zinc-900/80 border border-zinc-200/80 dark:border-zinc-800/80 rounded-2xl px-5 py-3.5 flex items-center justify-between shadow-lg shadow-black/5">
+      
+      <!-- Brand / Logo -->
+      <a href="#" class="flex items-center gap-3 group">
+        <div class="w-10 h-10 rounded-xl bg-gradient-to-br from-violet-600 to-amber-500 flex items-center justify-center text-white font-bold text-lg shadow-md shadow-violet-500/20 group-hover:scale-105 transition-transform">
+          M
+        </div>
+        <div>
+          <span class="font-bold text-base tracking-tight block leading-none" data-i18n="brandName">محمدحسن مومنی</span>
+          <span class="text-xs text-zinc-500 dark:text-zinc-400 font-mono mt-1 block" data-i18n="brandSub">Visual Comm. & Indie Dev</span>
+        </div>
+      </a>
+
+      <!-- Navigation Links (Desktop) -->
+      <div class="hidden md:flex items-center gap-6 text-sm font-medium text-zinc-600 dark:text-zinc-400">
+        <a href="#about" class="hover:text-violet-600 dark:hover:text-violet-400 transition-colors" data-i18n="navAbout">درباره من</a>
+        <a href="#projects" class="hover:text-violet-600 dark:hover:text-violet-400 transition-colors" data-i18n="navProjects">پروژه‌ها</a>
+        <a href="#research" class="hover:text-violet-600 dark:hover:text-violet-400 transition-colors" data-i18n="navResearch">پژوهش‌ها</a>
+        <a href="#contact" class="hover:text-violet-600 dark:hover:text-violet-400 transition-colors" data-i18n="navContact">ارتباط</a>
+      </div>
+
+      <!-- Action Buttons (Language & Theme) -->
+      <div class="flex items-center gap-2.5">
+        <!-- Language Switcher -->
+        <button id="langToggle" onclick="toggleLanguage()" class="px-3.5 py-2 rounded-xl text-xs font-bold font-mono bg-zinc-100 dark:bg-zinc-800 hover:bg-violet-500 hover:text-white dark:hover:bg-violet-600 transition-all border border-zinc-200 dark:border-zinc-700 flex items-center gap-1.5" title="Switch Language">
+          <i data-lucide="globe" class="w-3.5 h-3.5"></i>
+          <span id="langLabel">EN</span>
+        </button>
+
+        <!-- Theme Switcher -->
+        <button id="themeToggle" onclick="toggleTheme()" class="p-2 rounded-xl bg-zinc-100 dark:bg-zinc-800 hover:bg-zinc-200 dark:hover:bg-zinc-700 transition-all border border-zinc-200 dark:border-zinc-700 text-zinc-700 dark:text-zinc-300" title="Toggle Theme">
+          <i data-lucide="sun" id="sunIcon" class="w-4 h-4 hidden"></i>
+          <i data-lucide="moon" id="moonIcon" class="w-4 h-4"></i>
+        </button>
+      </div>
+
+    </nav>
+  </header>
+
+  <!-- Main Bento Grid Container -->
+  <main class="max-w-6xl mx-auto px-4 pt-8 pb-20 relative z-10 space-y-6">
+
+    <!-- SECTION 1: HERO BENTO GRID -->
+    <section id="about" class="grid grid-cols-1 md:grid-cols-12 gap-5">
+
+      <!-- Card 1: Main Intro & Bio (8 Cols) -->
+      <div class="bento-card md:col-span-8 rounded-3xl p-7 md:p-9 bg-white dark:bg-zinc-900/90 border border-zinc-200/80 dark:border-zinc-800/80 shadow-sm flex flex-col justify-between relative overflow-hidden">
+        <div class="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-violet-600 via-fuchsia-500 to-amber-500"></div>
+        
+        <div class="space-y-4">
+          <div class="inline-flex items-center gap-2 px-3 py-1.5 rounded-full text-xs font-medium bg-emerald-500/10 text-emerald-600 dark:text-emerald-400 border border-emerald-500/20">
+            <span class="w-2 h-2 rounded-full bg-emerald-500 animate-pulse"></span>
+            <span data-i18n="statusBadge">آماده همکاری در پروژه‌های طراحی، تصویرسازی و بازی‌سازی</span>
+          </div>
+
+          <h1 class="text-2xl sm:text-4xl font-extrabold tracking-tight leading-tight" data-i18n="heroTitle">
+            طراح گرافیک، تصویرگر و توسعه‌دهنده بازی‌های دوبعدی روایت‌محور
+          </h1>
+
+          <p class="text-zinc-600 dark:text-zinc-400 text-sm sm:text-base leading-relaxed text-justify" data-i18n="heroBio">
+            من محمدحسن مومنی هستم؛ دانشجوی کارشناسی ارشد ارتباط تصویری در دانشگاه هنر اصفهان. تمرکز من بر پیوند دادن میراث ادبی و اسطوره‌ای ایران (همچون مرزبان‌نامه و شاهنامه) با رسانه‌های تعاملی نوین، پلتفرمرهای دوبعدی پیکسلی و تصویرسازی وکتور است. در پژوهش‌هایم با تکیه بر نظریه ساخت‌گرایی سیمور پاپرت، محیط‌های یادگیری اکتشافی برای کودکان خلق می‌کنم.
+          </p>
+        </div>
+
+        <div class="pt-6 mt-6 border-t border-zinc-100 dark:border-zinc-800/80 flex flex-wrap items-center gap-3">
+          <a href="#projects" class="px-5 py-2.5 rounded-xl bg-violet-600 hover:bg-violet-500 text-white font-semibold text-sm flex items-center gap-2 shadow-lg shadow-violet-600/25 transition-all">
+            <i data-lucide="sparkles" class="w-4 h-4"></i>
+            <span data-i18n="btnViewProjects">مشاهده آثار و پروژه‌ها</span>
+          </a>
+          <a href="#contact" class="px-5 py-2.5 rounded-xl bg-zinc-100 dark:bg-zinc-800 hover:bg-zinc-200 dark:hover:bg-zinc-700 font-semibold text-sm flex items-center gap-2 border border-zinc-200 dark:border-zinc-700 transition-all">
+            <i data-lucide="mail" class="w-4 h-4"></i>
+            <span data-i18n="btnContactMe">ارتباط با من</span>
+          </a>
+        </div>
+      </div>
+
+      <!-- Card 2: Avatar / Visual Identity Card (4 Cols) -->
+      <div class="bento-card md:col-span-4 rounded-3xl p-7 bg-gradient-to-b from-zinc-900 to-zinc-950 text-white border border-zinc-800 shadow-sm flex flex-col items-center justify-between text-center relative overflow-hidden pixel-border">
+        <div class="w-full flex justify-between items-center text-xs font-mono text-zinc-400">
+          <span>ISFAHAN, IR</span>
+          <span class="px-2 py-0.5 rounded bg-violet-500/20 text-violet-300 border border-violet-500/30">MA Student</span>
+        </div>
+
+        <!-- Custom SVG Artistic Avatar Placeholder -->
+        <div class="my-6 relative group">
+          <div class="w-32 h-32 rounded-3xl bg-gradient-to-tr from-violet-600 via-indigo-500 to-amber-500 p-1 shadow-2xl shadow-violet-500/30 rotate-3 group-hover:rotate-0 transition-transform duration-300">
+            <div class="w-full h-full bg-zinc-900 rounded-[20px] flex flex-col items-center justify-center relative overflow-hidden">
+              <i data-lucide="gamepad-2" class="w-12 h-12 text-violet-400 mb-1"></i>
+              <span class="text-[10px] font-mono tracking-widest text-amber-400 uppercase">Pixel & Vector</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="space-y-1 w-full">
+          <h2 class="font-bold text-lg" data-i18n="cardName">محمدحسن مومنی</h2>
+          <p class="text-xs text-zinc-400" data-i18n="cardUni">دانشگاه هنر اصفهان | ارتباط تصویری</p>
+        </div>
+      </div>
+
+      <!-- Card 3: Core Specialties & Disciplines (4 Cols) -->
+      <div class="bento-card md:col-span-4 rounded-3xl p-6 bg-white dark:bg-zinc-900/90 border border-zinc-200/80 dark:border-zinc-800/80 flex flex-col justify-between">
+        <div class="flex items-center justify-between mb-4">
+          <span class="text-xs font-mono uppercase tracking-wider text-violet-600 dark:text-violet-400 font-semibold" data-i18n="specHeader">حوزه‌های تخصصی</span>
+          <i data-lucide="layers" class="w-4 h-4 text-zinc-400"></i>
+        </div>
+        <ul class="space-y-3 text-sm">
+          <li class="flex items-center gap-3 p-2.5 rounded-xl bg-zinc-50 dark:bg-zinc-800/50 border border-zinc-100 dark:border-zinc-800">
+            <i data-lucide="palette" class="w-4 h-4 text-violet-500 shrink-0"></i>
+            <span data-i18n="spec1">تصویرسازی کتاب کودک و کات‌سین وکتور</span>
+          </li>
+          <li class="flex items-center gap-3 p-2.5 rounded-xl bg-zinc-50 dark:bg-zinc-800/50 border border-zinc-100 dark:border-zinc-800">
+            <i data-lucide="swords" class="w-4 h-4 text-amber-500 shrink-0"></i>
+            <span data-i18n="spec2">طراحی بازی‌های دوبعدی Metroidvania و پیکسل‌آرت</span>
+          </li>
+          <li class="flex items-center gap-3 p-2.5 rounded-xl bg-zinc-50 dark:bg-zinc-800/50 border border-zinc-100 dark:border-zinc-800">
+            <i data-lucide="layout-template" class="w-4 h-4 text-emerald-500 shrink-0"></i>
+            <span data-i18n="spec3">طراحی گرافیک، هویت بصری و رابط کاربری (UI/UX)</span>
+          </li>
+        </ul>
+      </div>
+
+      <!-- Card 4: Technical & Creative Toolkit (8 Cols) -->
+      <div class="bento-card md:col-span-8 rounded-3xl p-6 md:p-7 bg-white dark:bg-zinc-900/90 border border-zinc-200/80 dark:border-zinc-800/80 flex flex-col justify-between">
+        <div class="flex items-center justify-between mb-4">
+          <div>
+            <h3 class="font-bold text-base" data-i18n="toolkitTitle">جعبه ابزار خلق و توسعه (Toolkit)</h3>
+            <p class="text-xs text-zinc-500 dark:text-zinc-400 mt-0.5" data-i18n="toolkitSub">نرم‌افزارها، موتورهای بازی‌سازی و چارچوب‌های پژوهشی</p>
+          </div>
+          <i data-lucide="cpu" class="w-5 h-5 text-violet-500"></i>
+        </div>
+
+        <div class="grid grid-cols-2 sm:grid-cols-4 gap-3 text-xs font-mono">
+          <div class="p-3 rounded-2xl bg-zinc-50 dark:bg-zinc-800/60 border border-zinc-200/60 dark:border-zinc-700/60 flex flex-col gap-1">
+            <span class="text-violet-600 dark:text-violet-400 font-bold">Godot Engine 4</span>
+            <span class="text-zinc-500 text-[11px]">GDScript / 2D Physics</span>
+          </div>
+          <div class="p-3 rounded-2xl bg-zinc-50 dark:bg-zinc-800/60 border border-zinc-200/60 dark:border-zinc-700/60 flex flex-col gap-1">
+            <span class="text-amber-600 dark:text-amber-400 font-bold">Pixel & Vector Art</span>
+            <span class="text-zinc-500 text-[11px]">2D Sprites & Cutscenes</span>
+          </div>
+          <div class="p-3 rounded-2xl bg-zinc-50 dark:bg-zinc-800/60 border border-zinc-200/60 dark:border-zinc-700/60 flex flex-col gap-1">
+            <span class="text-emerald-600 dark:text-emerald-400 font-bold">Penpot</span>
+            <span class="text-zinc-500 text-[11px]">UI / UX Visual Layout</span>
+          </div>
+          <div class="p-3 rounded-2xl bg-zinc-50 dark:bg-zinc-800/60 border border-zinc-200/60 dark:border-zinc-700/60 flex flex-col gap-1">
+            <span class="text-sky-600 dark:text-sky-400 font-bold">Obsidian Canvas</span>
+            <span class="text-zinc-500 text-[11px]">Narrative & Research</span>
+          </div>
+        </div>
+
+        <div class="mt-4 pt-4 border-t border-zinc-100 dark:border-zinc-800 flex flex-wrap items-center justify-between gap-2 text-xs text-zinc-500 dark:text-zinc-400">
+          <span data-i18n="inspirationLabel">منابع الهام بصری و روایی:</span>
+          <div class="flex flex-wrap gap-1.5 font-mono text-[11px]">
+            <span class="px-2.5 py-1 rounded-lg bg-zinc-100 dark:bg-zinc-800 text-zinc-700 dark:text-zinc-300">Marzban-nameh</span>
+            <span class="px-2.5 py-1 rounded-lg bg-zinc-100 dark:bg-zinc-800 text-zinc-700 dark:text-zinc-300">Shahnameh</span>
+            <span class="px-2.5 py-1 rounded-lg bg-zinc-100 dark:bg-zinc-800 text-zinc-700 dark:text-zinc-300">Hollow Knight</span>
+            <span class="px-2.5 py-1 rounded-lg bg-zinc-100 dark:bg-zinc-800 text-zinc-700 dark:text-zinc-300">Prince of Persia (1989)</span>
+          </div>
+        </div>
+      </div>
+
+    </section>
+
+    <!-- SECTION 2: FEATURED PROJECTS & GAMES -->
+    <section id="projects" class="pt-6 space-y-5">
+      <div class="flex items-center justify-between">
+        <div>
+          <h2 class="text-xl sm:text-2xl font-extrabold tracking-tight" data-i18n="projectsHeading">پروژه‌های شاخص و آثار تعاملی</h2>
+          <p class="text-xs sm:text-sm text-zinc-500 dark:text-zinc-400 mt-1" data-i18n="projectsSub">ترکیبی از طراحی بازی، تصویرسازی داستانی و پژوهش‌های کاربردی</p>
+        </div>
+        <span class="text-xs font-mono px-3 py-1.5 rounded-xl bg-violet-500/10 text-violet-600 dark:text-violet-400 border border-violet-500/20">Selected Works</span>
+      </div>
+
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-5">
+
+        <!-- Project 1: Master's Thesis Game -->
+        <article class="bento-card rounded-3xl p-6 bg-white dark:bg-zinc-900/90 border border-zinc-200/80 dark:border-zinc-800/80 flex flex-col justify-between group">
+          <div>
+            <div class="h-44 rounded-2xl bg-gradient-to-br from-violet-900 via-indigo-900 to-zinc-900 p-5 flex flex-col justify-between relative overflow-hidden mb-5 border border-violet-500/20">
+              <div class="flex justify-between items-start z-10">
+                <span class="px-2.5 py-1 rounded-lg text-[10px] font-mono uppercase bg-amber-500/20 text-amber-300 border border-amber-500/30">Godot 4 • Metroidvania</span>
+                <i data-lucide="award" class="w-5 h-5 text-amber-400"></i>
+              </div>
+              <div class="z-10">
+                <p class="text-xs text-violet-200 font-mono">Marzban-nameh Adaptation</p>
+                <h4 class="text-white font-bold text-lg mt-0.5" data-i18n="p1BannerTitle">کاوشگر الفبا در مرزبان‌نامه</h4>
+              </div>
+              <div class="absolute -bottom-6 -left-6 w-28 h-28 bg-violet-500/20 rounded-full blur-xl"></div>
+            </div>
+
+            <h3 class="font-bold text-lg mb-2 group-hover:text-violet-600 dark:group-hover:text-violet-400 transition-colors" data-i18n="p1Title">
+              بازی دیجیتال روایت‌محور آموزش الفبای فارسی
+            </h3>
+            <p class="text-xs sm:text-sm text-zinc-600 dark:text-zinc-400 leading-relaxed text-justify" data-i18n="p1Desc">
+              پروژه عملی پایان‌نامه ارشد؛ یک بازی پلتفرمر مترویدوانیا دوبعدی در موتور Godot با گیم‌پلی پیکسل‌آرت و کات‌سین‌های وکتور اقتباس‌شده از داستان‌های مرزبان‌نامه بر پایه ساخت‌گرایی سیمور پاپرت برای کودکان ۵ تا ۶ سال.
+            </p>
+          </div>
+
+          <div class="pt-5 mt-5 border-t border-zinc-100 dark:border-zinc-800 flex items-center justify-between">
+            <div class="flex gap-1.5 font-mono text-[10px] text-zinc-500">
+              <span>#GDScript</span>
+              <span>#PixelArt</span>
+              <span>#Papert</span>
+            </div>
+            <button onclick="openModal('p1')" class="text-xs font-bold text-violet-600 dark:text-violet-400 hover:underline flex items-center gap-1">
+              <span data-i18n="btnDetails">جزئیات پروژه</span>
+              <i data-lucide="arrow-up-left" class="w-3.5 h-3.5"></i>
+            </button>
+          </div>
+        </article>
+
+        <!-- Project 2: Mythic Architecture & Illustration -->
+        <article class="bento-card rounded-3xl p-6 bg-white dark:bg-zinc-900/90 border border-zinc-200/80 dark:border-zinc-800/80 flex flex-col justify-between group">
+          <div>
+            <div class="h-44 rounded-2xl bg-gradient-to-br from-amber-900/90 via-stone-900 to-zinc-900 p-5 flex flex-col justify-between relative overflow-hidden mb-5 border border-amber-500/20">
+              <div class="flex justify-between items-start z-10">
+                <span class="px-2.5 py-1 rounded-lg text-[10px] font-mono uppercase bg-amber-500/20 text-amber-300 border border-amber-500/30">Illustration & Narrative</span>
+                <i data-lucide="book-open" class="w-5 h-5 text-amber-400"></i>
+              </div>
+              <div class="z-10">
+                <p class="text-xs text-amber-200/80 font-mono">Visual Storytelling</p>
+                <h4 class="text-white font-bold text-lg mt-0.5" data-i18n="p2BannerTitle">اقتباس بصری متون کهن فارسی</h4>
+              </div>
+            </div>
+
+            <h3 class="font-bold text-lg mb-2 group-hover:text-amber-600 dark:group-hover:text-amber-400 transition-colors" data-i18n="p2Title">
+              تصویرسازی وکتور و کات‌سین‌های داستانی
+            </h3>
+            <p class="text-xs sm:text-sm text-zinc-600 dark:text-zinc-400 leading-relaxed text-justify" data-i18n="p2Desc">
+              طراحی کاراکتر، فضاسازی و خلق کات‌سین‌های چندفریمی وکتور با الهام از سنت تصویرگری کتاب‌های کودک ایران (کانون) و بازخوانی بصری حکایات کلیله و دمنه و شاهنامه.
+            </p>
+          </div>
+
+          <div class="pt-5 mt-5 border-t border-zinc-100 dark:border-zinc-800 flex items-center justify-between">
+            <div class="flex gap-1.5 font-mono text-[10px] text-zinc-500">
+              <span>#VectorArt</span>
+              <span>#Cutscenes</span>
+              <span>#Folklore</span>
+            </div>
+            <button onclick="openModal('p2')" class="text-xs font-bold text-amber-600 dark:text-amber-400 hover:underline flex items-center gap-1">
+              <span data-i18n="btnDetails">جزئیات پروژه</span>
+              <i data-lucide="arrow-up-left" class="w-3.5 h-3.5"></i>
+            </button>
+          </div>
+        </article>
+
+        <!-- Project 3: Structuralist Game Analysis & UI Design -->
+        <article class="bento-card rounded-3xl p-6 bg-white dark:bg-zinc-900/90 border border-zinc-200/80 dark:border-zinc-800/80 flex flex-col justify-between group">
+          <div>
+            <div class="h-44 rounded-2xl bg-gradient-to-br from-emerald-950 via-teal-900 to-zinc-900 p-5 flex flex-col justify-between relative overflow-hidden mb-5 border border-emerald-500/20">
+              <div class="flex justify-between items-start z-10">
+                <span class="px-2.5 py-1 rounded-lg text-[10px] font-mono uppercase bg-emerald-500/20 text-emerald-300 border border-emerald-500/30">Theory & Visual Design</span>
+                <i data-lucide="compass" class="w-5 h-5 text-emerald-400"></i>
+              </div>
+              <div class="z-10">
+                <p class="text-xs text-emerald-200/80 font-mono">Lévi-Strauss & Metaverse</p>
+                <h4 class="text-white font-bold text-lg mt-0.5" data-i18n="p3BannerTitle">معماری اسطوره‌ای و فضای دیجیتال</h4>
+              </div>
+            </div>
+
+            <h3 class="font-bold text-lg mb-2 group-hover:text-emerald-600 dark:group-hover:text-emerald-400 transition-colors" data-i18n="p3Title">
+              تحلیل ساختارگرایانه بازی‌های رترو و گرافیک متاورس
+            </h3>
+            <p class="text-xs sm:text-sm text-zinc-600 dark:text-zinc-400 leading-relaxed text-justify" data-i18n="p3Desc">
+              بررسی معماری اسطوره‌ای بازی کلاسیک Prince of Persia (1989) از دریچه ساختارگرایی کلود لوی-استروس و پژوهش پیرامون جایگاه طراحی گرافیک و مالکیت دیجیتال در عصر متاورس.
+            </p>
+          </div>
+
+          <div class="pt-5 mt-5 border-t border-zinc-100 dark:border-zinc-800 flex items-center justify-between">
+            <div class="flex gap-1.5 font-mono text-[10px] text-zinc-500">
+              <span>#Structuralism</span>
+              <span>#GameStudies</span>
+            </div>
+            <button onclick="openModal('p3')" class="text-xs font-bold text-emerald-600 dark:text-emerald-400 hover:underline flex items-center gap-1">
+              <span data-i18n="btnDetails">جزئیات پروژه</span>
+              <i data-lucide="arrow-up-left" class="w-3.5 h-3.5"></i>
+            </button>
+          </div>
+        </article>
+
+      </div>
+    </section>
+
+    <!-- SECTION 3: ACADEMIC RESEARCH & EDUCATION BENTO -->
+    <section id="research" class="pt-6 grid grid-cols-1 md:grid-cols-12 gap-5">
+
+      <!-- Academic Papers & Thesis (7 Cols) -->
+      <div class="bento-card md:col-span-7 rounded-3xl p-7 bg-white dark:bg-zinc-900/90 border border-zinc-200/80 dark:border-zinc-800/80 space-y-5">
+        <div class="flex items-center justify-between">
+          <div class="flex items-center gap-2.5">
+            <div class="p-2 rounded-xl bg-violet-500/10 text-violet-600 dark:text-violet-400">
+              <i data-lucide="graduation-cap" class="w-5 h-5"></i>
+            </div>
+            <h2 class="text-lg font-bold" data-i18n="researchTitle">پژوهش‌های علمی و دانشگاهی</h2>
+          </div>
+          <span class="text-xs font-mono text-zinc-400">Practice-Based Research</span>
+        </div>
+
+        <div class="space-y-4">
+          <!-- Item 1 -->
+          <div class="p-4 rounded-2xl bg-zinc-50 dark:bg-zinc-800/50 border border-zinc-200/60 dark:border-zinc-800 space-y-1.5">
+            <div class="flex items-center justify-between text-xs font-mono text-violet-600 dark:text-violet-400">
+              <span data-i18n="r1Tag">پایان‌نامه کارشناسی ارشد • دانشگاه هنر اصفهان</span>
+              <span>2025 – 2026</span>
+            </div>
+            <h3 class="font-bold text-sm sm:text-base" data-i18n="r1Title">
+              طراحی و خلق بازی دیجیتال روایت‌محور مبتنی بر ساخت‌گرایی پاپرت برای یادگیری الفبای فارسی در کودکان ۵ تا ۶ سال
+            </h3>
+            <p class="text-xs text-zinc-500 dark:text-zinc-400 leading-relaxed" data-i18n="r1Sub">
+              پژوهش کیفی کنش‌محور (Practice-Based) و توسعه‌ای-کاربردی در گروه ارتباط تصویری؛ تمرکز بر یادگیری از طریق اکتشاف فعال در ریزجهان‌های تعاملی (Microworlds).
+            </p>
+          </div>
+
+          <!-- Item 2 -->
+          <div class="p-4 rounded-2xl bg-zinc-50 dark:bg-zinc-800/50 border border-zinc-200/60 dark:border-zinc-800 space-y-1.5">
+            <div class="flex items-center justify-between text-xs font-mono text-amber-600 dark:text-amber-400">
+              <span data-i18n="r2Tag">مقاله علمی و پژوهشی</span>
+              <span>2025</span>
+            </div>
+            <h3 class="font-bold text-sm sm:text-base" data-i18n="r2Title">
+              جایگاه گرافیک در عصر متاورس: از تولید محتوا تا مالکیت دیجیتال
+            </h3>
+            <p class="text-xs text-zinc-500 dark:text-zinc-400 leading-relaxed" data-i18n="r2Sub">
+              بررسی تحول نقش طراحان گرافیک در زیست‌بوم‌های سه‌بعدی، دارایی‌های دیجیتال و اقتصاد خلاق نوین.
+            </p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Education & Methodology (5 Cols) -->
+      <div class="bento-card md:col-span-5 rounded-3xl p-7 bg-white dark:bg-zinc-900/90 border border-zinc-200/80 dark:border-zinc-800/80 flex flex-col justify-between space-y-5">
+        <div class="space-y-4">
+          <div class="flex items-center gap-2.5">
+            <div class="p-2 rounded-xl bg-amber-500/10 text-amber-600 dark:text-amber-400">
+              <i data-lucide="award" class="w-5 h-5"></i>
+            </div>
+            <h2 class="text-lg font-bold" data-i18n="eduTitle">تحصیلات و دوره‌های تخصصی</h2>
+          </div>
+
+          <div class="space-y-3 border-r-2 dark:border-zinc-800 border-zinc-200 pr-4 mr-1" id="timelineBorder">
+            <div>
+              <span class="text-xs font-mono text-violet-500">دانشگاه هنر اصفهان</span>
+              <h4 class="font-bold text-sm mt-0.5" data-i18n="edu1Title">کارشناسی ارشد ارتباط تصویری (گرافیک)</h4>
+              <p class="text-xs text-zinc-500 dark:text-zinc-400 mt-0.5" data-i18n="edu1Desc">دانشکده هنرهای تجسمی | گرایش تصویرسازی و رسانه‌های تعاملی</p>
+            </div>
+
+            <div class="pt-2">
+              <span class="text-xs font-mono text-amber-500">Sony Pictures Animation • Yellowbrick</span>
+              <h4 class="font-bold text-sm mt-0.5" data-i18n="edu2Title">دوره تخصصی This Is Animation</h4>
+              <p class="text-xs text-zinc-500 dark:text-zinc-400 mt-0.5" data-i18n="edu2Desc">آشنایی با پایپ‌لاین تولید انیمیشن و روایت بصری (۲۰۲۶)</p>
+            </div>
+          </div>
+        </div>
+
+        <div class="p-4 rounded-2xl bg-gradient-to-r from-violet-500/10 to-amber-500/10 border border-violet-500/20 text-xs leading-relaxed">
+          <strong class="block text-violet-600 dark:text-violet-400 mb-1" data-i18n="methodTitle">دیدگاه طراحی من:</strong>
+          <span class="text-zinc-600 dark:text-zinc-300" data-i18n="methodQuote">
+            «یادگیری عمیق زمانی رخ می‌دهد که کودک به جای تماشای منفعلانه، خود در یک دنیای داستانی دست به ساختن، تجربه کردن و کشف قواعد بزند.»
+          </span>
+        </div>
+      </div>
+
+    </section>
+
+    <!-- SECTION 4: CONTACT & FOOTER BENTO -->
+    <section id="contact" class="pt-6">
+      <div class="bento-card rounded-3xl p-8 md:p-10 bg-gradient-to-br from-zinc-900 via-zinc-900 to-violet-950 text-white border border-zinc-800 flex flex-col md:flex-row items-center justify-between gap-6">
+        <div class="space-y-2 text-center md:text-start max-w-xl">
+          <span class="text-xs font-mono uppercase tracking-widest text-violet-400" data-i18n="contactSub">Get In Touch</span>
+          <h2 class="text-2xl sm:text-3xl font-extrabold" data-i18n="contactHeading">آماده گفتگو درباره پروژه‌های خلاقانه</h2>
+          <p class="text-xs sm:text-sm text-zinc-400 leading-relaxed" data-i18n="contactText">
+            برای همکاری در زمینه طراحی گرافیک، تصویرسازی کتاب و بازی، یا تبادل نظر علمی درباره بازی‌های آموزشی و روایت‌محور، از طریق درگاه‌های زیر با من در ارتباط باشید.
+          </p>
+        </div>
+
+        <div class="flex flex-wrap items-center justify-center gap-3">
+          <a href="https://github.com/momenyshahriyar-svg" target="_blank" rel="noopener noreferrer" class="px-5 py-3 rounded-2xl bg-white/10 hover:bg-white/20 border border-white/15 font-mono text-xs flex items-center gap-2 transition-all">
+            <i data-lucide="github" class="w-4 h-4"></i>
+            <span>GitHub</span>
+          </a>
+          <a href="mailto:momenyshahriyar@gmail.com" class="px-5 py-3 rounded-2xl bg-violet-600 hover:bg-violet-500 text-white font-semibold text-xs flex items-center gap-2 shadow-lg shadow-violet-600/30 transition-all">
+            <i data-lucide="send" class="w-4 h-4"></i>
+            <span data-i18n="emailBtn">ارسال ایمیل مستقیم</span>
+          </a>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- Footer -->
+  <footer class="max-w-6xl mx-auto px-4 py-8 border-t border-zinc-200/60 dark:border-zinc-800/60 text-center text-xs text-zinc-500 flex flex-col sm:flex-row items-center justify-between gap-2">
+    <p data-i18n="footerCopy">© ۲۰۲۶ محمدحسن مومنی. طراحی‌شده با رویکرد Bento Grid.</p>
+    <p class="font-mono text-[11px]">Isfahan University of Art • Visual Communication</p>
+  </footer>
+
+  <!-- PROJECT DETAILS MODAL -->
+  <div id="projectModal" class="fixed inset-0 z-50 hidden items-center justify-center p-4 bg-black/70 backdrop-blur-sm">
+    <div class="bg-white dark:bg-zinc-900 border border-zinc-200 dark:border-zinc-800 rounded-3xl max-w-lg w-full p-6 sm:p-8 shadow-2xl space-y-4 relative animate-fadeIn">
+      <button onclick="closeModal()" class="absolute top-5 left-5 rtl:left-5 ltr:right-5 ltr:left-auto p-2 rounded-xl bg-zinc-100 dark:bg-zinc-800 hover:bg-zinc-200 dark:hover:bg-zinc-700">
+        <i data-lucide="x" class="w-4 h-4"></i>
+      </button>
+      <span id="modalTag" class="text-xs font-mono px-2.5 py-1 rounded-lg bg-violet-500/10 text-violet-500 inline-block"></span>
+      <h3 id="modalTitle" class="text-xl font-extrabold pt-1"></h3>
+      <p id="modalBody" class="text-sm text-zinc-600 dark:text-zinc-300 leading-relaxed text-justify"></p>
+      <div class="pt-4 border-t border-zinc-100 dark:border-zinc-800 flex justify-end">
+        <button onclick="closeModal()" class="px-5 py-2 rounded-xl bg-zinc-900 dark:bg-zinc-100 text-white dark:text-zinc-900 text-xs font-bold" data-i18n="modalClose">بستن پنجره</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- BILINGUAL DICTIONARY & INTERACTIVE SCRIPT -->
+  <script>
+    const translations = {
+      fa: {
+        brandName: "محمدحسن مومنی",
+        brandSub: "ارتباط تصویری و بازی‌ساز مستقل",
+        navAbout: "درباره من",
+        navProjects: "پروژه‌ها",
+        navResearch: "پژوهش‌ها",
+        navContact: "ارتباط",
+        statusBadge: "آماده همکاری در پروژه‌های طراحی، تصویرسازی و بازی‌سازی",
+        heroTitle: "طراح گرافیک، تصویرگر و توسعه‌دهنده بازی‌های دوبعدی روایت‌محور",
+        heroBio: "من محمدحسن مومنی هستم؛ دانشجوی کارشناسی ارشد ارتباط تصویری در دانشگاه هنر اصفهان. تمرکز من بر پیوند دادن میراث ادبی و اسطوره‌ای ایران (همچون مرزبان‌نامه و شاهنامه) با رسانه‌های تعاملی نوین، پلتفرمرهای دوبعدی پیکسلی و تصویرسازی وکتور است. در پژوهش‌هایم با تکیه بر نظریه ساخت‌گرایی سیمور پاپرت، محیط‌های یادگیری اکتشافی برای کودکان خلق می‌کنم.",
+        btnViewProjects: "مشاهده آثار و پروژه‌ها",
+        btnContactMe: "ارتباط با من",
+        cardName: "محمدحسن مومنی",
+        cardUni: "دانشگاه هنر اصفهان | ارتباط تصویری",
+        specHeader: "حوزه‌های تخصصی",
+        spec1: "تصویرسازی کتاب کودک و کات‌سین وکتور",
+        spec2: "طراحی بازی‌های دوبعدی Metroidvania و پیکسل‌آرت",
+        spec3: "طراحی گرافیک، هویت بصری و رابط کاربری (UI/UX)",
+        toolkitTitle: "جعبه ابزار خلق و توسعه (Toolkit)",
+        toolkitSub: "نرم‌افزارها، موتورهای بازی‌سازی و چارچوب‌های پژوهشی",
+        inspirationLabel: "منابع الهام بصری و روایی:",
+        projectsHeading: "پروژه‌های شاخص و آثار تعاملی",
+        projectsSub: "ترکیبی از طراحی بازی، تصویرسازی داستانی و پژوهش‌های کاربردی",
+        p1BannerTitle: "کاوشگر الفبا در مرزبان‌نامه",
+        p1Title: "بازی دیجیتال روایت‌محور آموزش الفبای فارسی",
+        p1Desc: "پروژه عملی پایان‌نامه ارشد؛ یک بازی پلتفرمر مترویدوانیا دوبعدی در موتور Godot با گیم‌پلی پیکسل‌آرت و کات‌سین‌های وکتور اقتباس‌شده از داستان‌های مرزبان‌نامه بر پایه ساخت‌گرایی سیمور پاپرت برای کودکان ۵ تا ۶ سال.",
+        p2BannerTitle: "اقتباس بصری متون کهن فارسی",
+        p2Title: "تصویرسازی وکتور و کات‌سین‌های داستانی",
+        p2Desc: "طراحی کاراکتر، فضاسازی و خلق کات‌سین‌های چندفریمی وکتور با الهام از سنت تصویرگری کتاب‌های کودک ایران (کانون) و بازخوانی بصری حکایات کلیله و دمنه و شاهنامه.",
+        p3BannerTitle: "معماری اسطوره‌ای و فضای دیجیتال",
+        p3Title: "تحلیل ساختارگرایانه بازی‌های رترو و گرافیک متاورس",
+        p3Desc: "بررسی معماری اسطوره‌ای بازی کلاسیک Prince of Persia (1989) از دریچه ساختارگرایی کلود لوی-استروس و پژوهش پیرامون جایگاه طراحی گرافیک و مالکیت دیجیتال در عصر متاورس.",
+        btnDetails: "جزئیات پروژه",
+        researchTitle: "پژوهش‌های علمی و دانشگاهی",
+        r1Tag: "پایان‌نامه کارشناسی ارشد • دانشگاه هنر اصفهان",
+        r1Title: "طراحی و خلق بازی دیجیتال روایت‌محور مبتنی بر ساخت‌گرایی پاپرت برای یادگیری الفبای فارسی در کودکان ۵ تا ۶ سال",
+        r1Sub: "پژوهش کیفی کنش‌محور (Practice-Based) و توسعه‌ای-کاربردی در گروه ارتباط تصویری؛ تمرکز بر یادگیری از طریق اکتشاف فعال در ریزجهان‌های تعاملی (Microworlds).",
+        r2Tag: "مقاله علمی و پژوهشی",
+        r2Title: "جایگاه گرافیک در عصر متاورس: از تولید محتوا تا مالکیت دیجیتال",
+        r2Sub: "بررسی تحول نقش طراحان گرافیک در زیست‌بوم‌های سه‌بعدی، دارایی‌های دیجیتال و اقتصاد خلاق نوین.",
+        eduTitle: "تحصیلات و دوره‌های تخصصی",
+        edu1Title: "کارشناسی ارشد ارتباط تصویری (گرافیک)",
+        edu1Desc: "دانشکده هنرهای تجسمی | گرایش تصویرسازی و رسانه‌های تعاملی",
+        edu2Title: "دوره تخصصی This Is Animation",
+        edu2Desc: "آشنایی با پایپ‌لاین تولید انیمیشن و روایت بصری (۲۰۲۶)",
+        methodTitle: "دیدگاه طراحی من:",
+        methodQuote: "«یادگیری عمیق زمانی رخ می‌دهد که کودک به جای تماشای منفعلانه، خود در یک دنیای داستانی دست به ساختن، تجربه کردن و کشف قواعد بزند.»",
+        contactSub: "Get In Touch",
+        contactHeading: "آماده گفتگو درباره پروژه‌های خلاقانه",
+        contactText: "برای همکاری در زمینه طراحی گرافیک، تصویرسازی کتاب و بازی، یا تبادل نظر علمی درباره بازی‌های آموزشی و روایت‌محور، از طریق درگاه‌های زیر با من در ارتباط باشید.",
+        emailBtn: "ارسال ایمیل مستقیم",
+        footerCopy: "© ۲۰۲۶ محمدحسن مومنی. طراحی‌شده با رویکرد Bento Grid.",
+        modalClose: "بستن پنجره"
+      },
+      en: {
+        brandName: "Mohammad Hasan Momeni",
+        brandSub: "Visual Comm. & Indie Game Dev",
+        navAbout: "About",
+        navProjects: "Projects",
+        navResearch: "Research",
+        navContact: "Contact",
+        statusBadge: "Available for Graphic Design, Illustration & Indie Game Projects",
+        heroTitle: "Graphic Designer, Illustrator & Narrative 2D Game Developer",
+        heroBio: "I am Mohammad Hasan Momeni, an M.A. student in Visual Communication at Isfahan University of Art. My work bridges classical Persian literature and mythology (such as Marzban-nameh and Shahnameh) with interactive media, 2D pixel-art Metroidvania platformers, and vector illustrations. Grounded in Seymour Papert's Constructionism, I design exploratory microworlds for early childhood learning.",
+        btnViewProjects: "Explore Selected Works",
+        btnContactMe: "Get in Touch",
+        cardName: "Mohammad Hasan Momeni",
+        cardUni: "Isfahan University of Art | Visual Comm.",
+        specHeader: "Core Disciplines",
+        spec1: "Children's Book Illustration & Vector Cutscenes",
+        spec2: "2D Pixel-Art Metroidvania Game Design",
+        spec3: "Visual Identity, Graphic Design & UI/UX",
+        toolkitTitle: "Creative & Technical Toolkit",
+        toolkitSub: "Game engines, design software, and research frameworks",
+        inspirationLabel: "Visual & Narrative Inspirations:",
+        projectsHeading: "Featured Projects & Interactive Works",
+        projectsSub: "A synthesis of 2D game development, narrative illustration, and practice-based research",
+        p1BannerTitle: "Alphabet Explorer: Marzban-nameh",
+        p1Title: "Narrative-Driven Game for Persian Alphabet Learning",
+        p1Desc: "M.A. Thesis practical project: A 2D pixel-art Metroidvania platformer built in Godot Engine 4 with GDScript, combining active gameplay with multi-frame vector cutscenes adapted from Marzban-nameh based on Papert's Constructionism for children aged 5–6.",
+        p2BannerTitle: "Visual Adaptation of Persian Classics",
+        p2Title: "Vector Illustrations & Narrative Cutscenes",
+        p2Desc: "Character design, world-building, and multi-frame static cutscenes inspired by Iranian children's book illustration traditions (Kanoon) and visual retellings of Kalilah & Dimnah and Shahnameh.",
+        p3BannerTitle: "Mythic Architecture & Digital Space",
+        p3Title: "Structuralist Game Analysis & Metaverse Graphics",
+        p3Desc: "Structuralist analysis of the mythic architecture of Prince of Persia (1989) through Claude Lévi-Strauss's framework, alongside academic research on graphic design and digital ownership in the Metaverse.",
+        btnDetails: "View Details",
+        researchTitle: "Academic & Practice-Based Research",
+        r1Tag: "M.A. Thesis • Isfahan University of Art",
+        r1Title: "Designing and Creating a Narrative-Driven Digital Game Based on Papert's Constructionism for Persian Alphabet Learning in Children Aged 5–6",
+        r1Sub: "Practice-based and applied-developmental qualitative study in the Department of Visual Communication, focusing on active discovery and self-directed problem-solving.",
+        r2Tag: "Academic Paper",
+        r2Title: "The Role of Graphic Design in the Metaverse Era: From Content Creation to Digital Ownership",
+        r2Sub: "Examining the evolution of visual communication, NFTs, and digital ownership within decentralized virtual environments.",
+        eduTitle: "Education & Specialized Training",
+        edu1Title: "M.A. in Visual Communication (Graphic Design)",
+        edu1Desc: "Faculty of Visual Arts, Isfahan University of Art",
+        edu2Title: "This Is Animation Course",
+        edu2Desc: "Sony Pictures Animation / Imageworks via Yellowbrick (2026)",
+        methodTitle: "Design Philosophy:",
+        methodQuote: "\"Meaningful learning happens when children actively construct, experiment, and discover rules inside a narrative microworld rather than passively consuming instruction.\"",
+        contactSub: "Get In Touch",
+        contactHeading: "Let's Collaborate on Creative Projects",
+        contactText: "Feel free to reach out for collaborations in graphic design, illustration, indie game development, or academic discussions on educational game design.",
+        emailBtn: "Send Direct Email",
+        footerCopy: "© 2026 Mohammad Hasan Momeni. Crafted with a Bento Grid architecture.",
+        modalClose: "Close Window"
+      }
+    };
+
+    const modalData = {
+      p1: {
+        fa: {
+          tag: "Godot Engine 4 • GDScript • 2026",
+          title: "طراحی و خلق بازی دیجیتال روایت‌محور مبتنی بر ساخت‌گرایی پاپرت",
+          body: "در این پروژه که بخش عملی پایان‌نامه کارشناسی ارشد در دانشگاه هنر اصفهان است، کودک در قالب یک ماجراجویی دوبعدی مترویدوانیا با کاراکترهای اقتباس‌شده از داستان‌های مرزبان‌نامه همراه می‌شود. گیم‌پلی فعال با گرافیک پیکسل‌آرت طراحی شده و روایت داستان از طریق کات‌سین‌های تصویرسازی وکتور نمایش داده می‌شود. برخلاف روش‌های سنتی تکرار و تمرین، کودک با کاوش در محیط و حل معماهای محیطی، اشکال و صداهای الفبای فارسی را کشف می‌کند."
+        },
+        en: {
+          tag: "Godot Engine 4 • GDScript • 2026",
+          title: "Narrative-Driven Digital Game Based on Papert's Constructionism",
+          body: "Developed as the practical component of my Master's thesis at Isfahan University of Art, this 2D Metroidvania platformer immerses children aged 5–6 in stories adapted from the classical Persian book Marzban-nameh. It combines pixel-art locomotion and physics in Godot 4 with multi-frame vector cutscenes, allowing children to learn Persian alphabet letters through active exploration rather than rote memorization."
+        }
+      },
+      p2: {
+        fa: {
+          tag: "Vector Art • Character Design",
+          title: "تصویرسازی وکتور و اقتباس بصری از ادبیات کلاسیک ایران",
+          body: "این مجموعه شامل طراحی کاراکتر، پالت‌های رنگی و فضاسازی‌های داستانی با الهام از آثار برجسته تصویرگری کتاب کودک ایران (مانند آثار علی‌اکبر صادقی و پژمان رحیمی‌زاده) و استانداردهای بین‌المللی تصویرگری است که برای استفاده در کات‌سین‌های بازی و کتاب‌های مصور طراحی شده‌اند."
+        },
+        en: {
+          tag: "Vector Art • Character Design",
+          title: "Vector Illustration & Visual Adaptation of Persian Folklore",
+          body: "A collection of character designs, visual layouts, and multi-frame narrative sequences inspired by canonical Iranian illustrators and international picture book standards, tailored for interactive storytelling and game cutscenes."
+        }
+      },
+      p3: {
+        fa: {
+          tag: "Game Studies • Visual Theory",
+          title: "پژوهش‌های نظری: از اسطوره‌شناسی لوی-استروس تا متاورس",
+          body: "این بخش شامل مطالعات تحلیلی روی تقابل‌های دوگانه و معماری فضایی در بازی کلاسیک شاهزاده ایرانی (۱۹۸۹) بر اساس دیدگاه ساختارگرایی کلود لوی-استروس و همچنین بررسی آینده مالکیت آثار گرافیکی در بستر وب ۳ و متاورس است."
+        },
+        en: {
+          tag: "Game Studies • Visual Theory",
+          title: "Theoretical Research: From Lévi-Strauss to the Metaverse",
+          body: "Encompasses structuralist analyses of binary oppositions and spatial architecture in Prince of Persia (1989) using Claude Lévi-Strauss's theoretical lens, alongside published research on graphic design and digital ownership in the Metaverse."
+        }
+      }
+    };
+
+    let currentLang = localStorage.getItem('portfolio_lang') || 'fa';
+
+    function applyLanguage(lang) {
+      currentLang = lang;
+      localStorage.setItem('portfolio_lang', lang);
+      const htmlEl = document.documentElement;
+      htmlEl.lang = lang;
+      htmlEl.dir = lang === 'fa' ? 'rtl' : 'ltr';
+
+      document.getElementById('langLabel').textContent = lang === 'fa' ? 'EN' : 'FA';
+
+      // Adjust timeline border direction
+      const timeline = document.getElementById('timelineBorder');
+      if (lang === 'en') {
+        timeline.classList.remove('border-r-2', 'pr-4', 'mr-1');
+        timeline.classList.add('border-l-2', 'pl-4', 'ml-1');
+      } else {
+        timeline.classList.remove('border-l-2', 'pl-4', 'ml-1');
+        timeline.classList.add('border-r-2', 'pr-4', 'mr-1');
+      }
+
+      // Update all text elements
+      document.querySelectorAll('[data-i18n]').forEach(el => {
+        const key = el.getAttribute('data-i18n');
+        if (translations[lang][key]) {
+          el.textContent = translations[lang][key];
+        }
+      });
+    }
+
+    function toggleLanguage() {
+      const nextLang = currentLang === 'fa' ? 'en' : 'fa';
+      applyLanguage(nextLang);
+    }
+
+    function toggleTheme() {
+      const htmlEl = document.documentElement;
+      const isDark = htmlEl.classList.toggle('dark');
+      localStorage.setItem('portfolio_theme', isDark ? 'dark' : 'light');
+      updateThemeIcons(isDark);
+    }
+
+    function updateThemeIcons(isDark) {
+      document.getElementById('sunIcon').classList.toggle('hidden', !isDark);
+      document.getElementById('moonIcon').classList.toggle('hidden', isDark);
+    }
+
+    function openModal(projectKey) {
+      const info = modalData[projectKey][currentLang];
+      document.getElementById('modalTag').textContent = info.tag;
+      document.getElementById('modalTitle').textContent = info.title;
+      document.getElementById('modalBody').textContent = info.body;
+      const modal = document.getElementById('projectModal');
+      modal.classList.remove('hidden');
+      modal.classList.add('flex');
+    }
+
+    function closeModal() {
+      const modal = document.getElementById('projectModal');
+      modal.classList.add('hidden');
+      modal.classList.remove('flex');
+    }
+
+    // Close modal on backdrop click
+    document.getElementById('projectModal').addEventListener('click', (e) => {
+      if (e.target.id === 'projectModal') closeModal();
+    });
+
+    // Initialize on load
+    document.addEventListener('DOMContentLoaded', () => {
+      lucide.createIcons();
+      const savedTheme = localStorage.getItem('portfolio_theme') || 'dark';
+      document.documentElement.classList.toggle('dark', savedTheme === 'dark');
+      updateThemeIcons(savedTheme === 'dark');
+      applyLanguage(currentLang);
+    });
+  </script>
+</body>
+</html>
